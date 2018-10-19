@@ -1,10 +1,18 @@
 import React, {Component} from 'react';
 import {View,Text} from 'react-native';
 import {connect} from 'react-redux';
-import {EmailChangedAction,PasswordChangedAction,LoginUserAction} from '../Actions';
-import {Card, CardSection, Input, Button, Spinner} from './Common';
+import {EmailChangedAction,PasswordChangedAction,LoginUserAction} from '../../Actions';
+import {Card, CardSection, Input, Button, Spinner} from '../Common';
 
 class LoginForm extends Component{
+
+    constructor() {
+        super();
+        console.ignoredYellowBox = [
+        'Setting a timer',
+        'isMounted'
+        ];
+    }
 
     onEmailTyped(text){
         this.props.EmailChangedAction(text);

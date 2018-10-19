@@ -3,7 +3,9 @@ import { View } from 'react-native';
 
 const CardSection = (props) => {
     return (
-        <View style={styles.containerStyle}>
+        // burdaki style'a ek olarak cardSection kullanıldığı yerdeki style elementleri ile
+        // ezilebilmesi için props.style kullandık.
+        <View style={[styles.containerStyle, props.style]}>
             {props.children}
         </View>
     );
