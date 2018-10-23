@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View, TouchableWithoutFeedback} from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import {CardSection} from './Common';
+import {CardSection} from '../Common';
 
 class ListItem extends Component{
     onRowPress(){

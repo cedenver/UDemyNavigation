@@ -2,10 +2,10 @@ import _ from 'lodash';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {ListView,View} from 'react-native';
-import {EmployeesFetchAction} from '../../Actions';
-import ListItem from '../ListItem';
+import {EmployeeListRequestedAction} from './EmployeeListActions';
+import ListItem from '../../Components/Custom/ListItem';
 
-class EmployeeList extends Component{
+class EmployeeListForm extends Component{
 
     constructor() {
         super();
@@ -16,7 +16,7 @@ class EmployeeList extends Component{
     }
 
     componentWillMount(){
-        this.props.EmployeesFetchAction();
+        this.props.EmployeeListRequestedAction();
         this.createDataSource(this.props);
     }
 
@@ -56,4 +56,4 @@ const mapStateToProps = state => {
     return {employees};
 };
 
-export default connect(mapStateToProps,{EmployeesFetchAction}) (EmployeeList);
+export default connect(mapStateToProps,{EmployeeListRequestedAction}) (EmployeeListForm);

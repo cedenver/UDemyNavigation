@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {View,Text} from 'react-native';
 import {connect} from 'react-redux';
-import {EmailChangedAction,PasswordChangedAction,LoginUserAction} from '../../Actions';
-import {Card, CardSection, Input, Button, Spinner} from '../Common';
+import {InputTextChangedAction,LoginUserAction} from './LoginFormActions';
+import {Card, CardSection, Input, Button, Spinner} from '../../Components/Common';
 
 class LoginForm extends Component{
 
@@ -15,11 +15,11 @@ class LoginForm extends Component{
     }
 
     onEmailTyped(text){
-        this.props.EmailChangedAction(text);
+        this.props.InputTextChangedAction({prop:'email', value: text});
     }
 
     onPasswordTyped(text){
-        this.props.PasswordChangedAction(text);
+        this.props.InputTextChangedAction({prop:'password', value: text});
     }
 
     onLoginPressed(){
@@ -91,5 +91,5 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, 
-        {EmailChangedAction,PasswordChangedAction,LoginUserAction}
+        {InputTextChangedAction,LoginUserAction}
     )(LoginForm);

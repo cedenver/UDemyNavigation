@@ -1,13 +1,6 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
-import {EMPLOYEE_UPDATE_TYPE} from './types';
-
-export const EmployeeUpdateAction = ({prop,value}) => {
-    return {
-        type: EMPLOYEE_UPDATE_TYPE,
-        payload: {prop, value}
-    }
-};
+import {INPUT_TEXT_CHANGED} from '../../Components/Custom/EmployeeFormActions';
 
 export const EmployeeCreateAction = ({name,phone,shift}) => {
     const {currentUser} = firebase.auth();
@@ -21,9 +14,9 @@ export const EmployeeCreateAction = ({name,phone,shift}) => {
         firebase.database().ref(`/users/${currentUser.uid}/employees`)
             .push({name,phone,shift})
             .then(()=> {
-                dispatch({type: EMPLOYEE_UPDATE_TYPE,payload:nameReset});
-                dispatch({type: EMPLOYEE_UPDATE_TYPE,payload:phoneReset});
-                dispatch({type: EMPLOYEE_UPDATE_TYPE,payload:shiftReset});
+                dispatch({type: INPUT_TEXT_CHANGED,payload:nameReset});
+                dispatch({type: INPUT_TEXT_CHANGED,payload:phoneReset});
+                dispatch({type: INPUT_TEXT_CHANGED,payload:shiftReset});
                 Actions.pop();
             })
     }

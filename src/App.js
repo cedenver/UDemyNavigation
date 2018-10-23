@@ -3,8 +3,8 @@ import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
-import reducers from './Reducers';
-import Router from './Router';
+import reducers from './Common/CombineReducers';
+import Router from './Common/Router';
 
 class App extends Component{
 

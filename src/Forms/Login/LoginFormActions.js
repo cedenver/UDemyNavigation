@@ -3,22 +3,23 @@
 // bu nesne içinde ise type diye bir özellik var
 // hangi nesneden döndüğüne buna göre karar veriyor
 import firebase from 'firebase';
-import {EMAIL_CHANGED_TYPE, PASSWORD_CHANGED_TYPE, LOGIN_SUCCESS_TYPE, LOGIN_FAIL_TYPE, LOGIN_BUTTON_PRESSED_TYPE} from './types';
 import { Actions } from 'react-native-router-flux';
 
-export const EmailChangedAction = (text) => {
-    return {
-        type: EMAIL_CHANGED_TYPE,
-        payload: text
-    };
-}
+// ACTION TYPES
+const prefix = 'LoginForm';
+export const INPUT_TEXT_CHANGED = prefix + "InputTextChanged";
+export const LOGIN_BUTTON_PRESSED = prefix + 'LoginButtonPressed';
+export const LOGIN_SUCCESS = prefix + 'LoginSuccess';
+export const LOGIN_FAIL = prefix + 'LoginFail';
 
-export const PasswordChangedAction = (text) => {
+// ACTIONS
+
+export const InputTextChangedAction = ({prop,value}) => {
     return {
-        type: PASSWORD_CHANGED_TYPE,
-        payload: text
-    };
-}
+        type: INPUT_TEXT_CHANGED,
+        payload: {prop, value}
+    }
+};
 
 //console.warn("user" + user.password);
 export const LoginUserAction = ({email,password}) => {
@@ -27,7 +28,7 @@ export const LoginUserAction = ({email,password}) => {
 
         // dispatch ile birden action içinde birden fazla kere reducer'ları tetikleyebiliyoruz
         // Böylece birden fazla kere state değişimi olabiliyor
-        dispatch({type: LOGIN_BUTTON_PRESSED_TYPE});
+        dispatch({type: LOGIN_BUTTON_PRESSED});
 
         firebase.auth().signInWithEmailAndPassword(email,password)
         .then(user => LoginUserSuccess(dispatch,user))
@@ -41,14 +42,14 @@ export const LoginUserAction = ({email,password}) => {
 
 const LoginUserFailed = (dispatch, ex) => {
     dispatch({
-        type: LOGIN_FAIL_TYPE,
+        type: LOGIN_FAIL,
         payload: ex.message
     });
 }
 
 const LoginUserSuccess = (dispatch, user) => {
     dispatch({
-        type: LOGIN_SUCCESS_TYPE,
+        type: LOGIN_SUCCESS,
         payload: user
     });
 

@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { EmployeeUpdateAction, EmployeeCreateAction } from '../../Actions';
-import {Card,CardSection,Button} from '../Common';
-import EmployeeForm from './EmployeeForm';
+import {EmployeeCreateAction } from './EmployeeCreateActions';
+import {Card,CardSection,Button} from '../../Components/Common';
+import EmployeeForm from '../../Components/Custom/EmployeeForm';
 
-class EmployeeCreate extends Component{
+class EmployeeCreateForm extends Component{
 
     onButtonPress(){
         const {name, phone, shift} = this.props;
@@ -16,7 +16,7 @@ class EmployeeCreate extends Component{
         return(
             // ...props ile burdaki tüm parametreleri EmployeeForm tarafına paslıyoruz.
             <Card>
-                <EmployeeForm {...this.props}/>
+                <EmployeeForm/>
                 <CardSection>
                     <Button onPress={this.onButtonPress.bind(this)}>Create</Button>
                 </CardSection>
@@ -24,12 +24,13 @@ class EmployeeCreate extends Component{
         );
     }
 }
+// Employee Form üzerinde değişiklik olduğu anda burdaki props'larda güncellensin
 const mapStateToProps = (state) => {
     return {
-        name: state.AppStateEmployeeCreate.name, 
-        phone: state.AppStateEmployeeCreate.phone,
-        shift: state.AppStateEmployeeCreate.shift
+        name: state.AppStateEmployeeForm.name, 
+        phone: state.AppStateEmployeeForm.phone,
+        shift: state.AppStateEmployeeForm.shift
    };
 }
 
-export default connect(mapStateToProps, {EmployeeUpdateAction, EmployeeCreateAction})(EmployeeCreate);
+export default connect(mapStateToProps, {EmployeeCreateAction})(EmployeeCreateForm);

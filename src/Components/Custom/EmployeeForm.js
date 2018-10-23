@@ -1,17 +1,24 @@
 import React, {Component} from 'react';
 import {View, Text, Picker} from 'react-native';
 import {connect} from 'react-redux';
-import {EmployeeUpdateAction} from '../../Actions';
+import {InputTextChangedAction} from './EmployeeFormActions';
 import {CardSection,Input} from '../Common';
 
 class EmployeeForm extends Component{
+
+    componentWillUnmount()
+    {
+        this.props.InputTextChangedAction({prop:'name', value: ''});
+        this.props.InputTextChangedAction({prop:'phone', value: ''});
+        this.props.InputTextChangedAction({prop:'shift', value: ''});
+    }
     
     onNameTyped(text){
-        this.props.EmployeeUpdateAction({prop:'name', value: text});
+        this.props.InputTextChangedAction({prop:'name', value: text});
     }
 
     onPhoneTyped(text){
-        this.props.EmployeeUpdateAction({prop:'phone', value: text});
+        this.props.InputTextChangedAction({prop:'phone', value: text});
     }
 
     render(){
@@ -28,7 +35,7 @@ class EmployeeForm extends Component{
                 <CardSection>
                     <Text style={styles.pickerTextStyle}>Shift</Text>
                     <Picker style={{flex:1}} selectedValue={this.props.shift} 
-                        onValueChange={day=>this.props.EmployeeUpdateAction({prop:'shift', value: day})}>
+                        onValueChange={day=>this.props.InputTextChangedAction({prop:'shift', value: day})}>
                         <Picker.Item label="Monday" value="Monday" />
                         <Picker.Item label="Tuesday" value="Tuesday" />
                         <Picker.Item label="Wednesday" value="Wednesday" />
@@ -52,10 +59,10 @@ const styles = {
 
 const mapStateToProps = (state) =>{
     return {
-        name: state.AppStateEmployeeCreate.name, 
-        phone: state.AppStateEmployeeCreate.phone,
-        shift: state.AppStateEmployeeCreate.shift
+        name: state.AppStateEmployeeForm.name, 
+        phone: state.AppStateEmployeeForm.phone,
+        shift: state.AppStateEmployeeForm.shift
    };
 }
 
-export default connect(mapStateToProps,{EmployeeUpdateAction})(EmployeeForm);
+export default connect(mapStateToProps,{InputTextChangedAction})(EmployeeForm);

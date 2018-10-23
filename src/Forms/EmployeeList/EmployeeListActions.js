@@ -1,7 +1,13 @@
 import firebase from 'firebase';
-import {EMPLOYEES_FETCH_TYPE} from './types';
 
-export const EmployeesFetchAction = () => {
+// ACTION TYPES
+
+const prefix = 'EmployeeList';
+export const LIST_REQUESTED = prefix + 'ListRequested';
+
+// ACTIONS 
+
+export const EmployeeListRequestedAction = () => {
 
     const {currentUser} = firebase.auth();
 
@@ -9,7 +15,7 @@ export const EmployeesFetchAction = () => {
         // ne zaman yeni employee kaydedilse EMPLOYEES_FETCH_SUCCESS type tetiklenecek. 
         firebase.database().ref(`/users/${currentUser.uid}/employees`)
             .on('value', snapshot => {
-                dispatch({type: EMPLOYEES_FETCH_TYPE, payload: snapshot.val()});
+                dispatch({type: LIST_REQUESTED, payload: snapshot.val()});
             });
     };
 };

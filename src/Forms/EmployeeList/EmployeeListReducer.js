@@ -1,10 +1,10 @@
-import {EMPLOYEES_FETCH_TYPE} from '../Actions/types';
+import {LIST_REQUESTED} from './EmployeeListActions';
 
 const INITIAL_STATE = {};
 
 export default (state = INITIAL_STATE, action) => {
     switch(action.type){
-        case EMPLOYEES_FETCH_TYPE:
+        case LIST_REQUESTED:
             return action.payload;
         default:
             return state;
